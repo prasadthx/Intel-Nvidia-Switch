@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 authors = ["Prasad Zore <prasad.zore@outlook.com>"]
 description = "A small utility to switch Intel-Nvidia Graphics on Linux"
-include = ["./configs"]
+exclude = ["./configs"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]

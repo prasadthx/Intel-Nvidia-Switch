@@ -1,1 +1,1 @@
-/home/prasad/scripts/intel-nvidia-switch/target/debug/intel-nvidia-switch: /home/prasad/scripts/intel-nvidia-switch/src/args.rs /home/prasad/scripts/intel-nvidia-switch/src/graphics.rs /home/prasad/scripts/intel-nvidia-switch/src/main.rs
+/home/prasad/scripts/intel-nvidia-switch/target/debug/intel-nvidia-switch: /home/prasad/scripts/intel-nvidia-switch/src/args.rs /home/prasad/scripts/intel-nvidia-switch/src/graphics.rs /home/prasad/scripts/intel-nvidia-switch/src/main.rs /home/prasad/scripts/intel-nvidia-switch/src/switch.rs
