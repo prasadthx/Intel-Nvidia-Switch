@@ -1,0 +1,3 @@
+./intel-nvidia-switch/target/
+
+./intel-nvidia-switch/Cargo.lock
