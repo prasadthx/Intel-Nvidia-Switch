@@ -10,6 +10,7 @@ pub struct Args {
     #[arg(short='S')]
     pub switch: Option<GraphicsMode>,
     
+    /// Run any program with Nvidia GPU in Hybrid Mode
     #[arg(long)]
     pub run: Option<String>,
 }
