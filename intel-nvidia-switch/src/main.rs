@@ -29,7 +29,7 @@ fn main() {
     }
     
     if let Some(program) = args.run {
-        run_on_nvidia(program);
+        offload_to_nvidia(program);
     }
 }
 
@@ -41,4 +41,14 @@ fn switch_to_intel(){
     }
     println!("Switching to Intel.....");
     switch_intel();
+}
+
+fn offload_to_nvidia(program: String) {
+    let gpu_status = env::var("GPU_STATUS");
+    if gpu_status.unwrap() == "intel" {
+        println!("\x1b[96m{}\x1b[0m", "GPU set to Intel. Change to Nvidia Mode / Hybrid Mode");
+        return;
+    }
+    println!("Running on Nvidia.....");
+    run_on_nvidia(program);
 }
