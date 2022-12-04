@@ -5,6 +5,19 @@ pub fn switch_intel() {
     
     let mut switch = true;
     
+    if let Result::Ok(_remove_nvidia_pm) = remove_file("/etc/modprobe.d/nvidia-pm.conf"){
+        println!("\x1b[1;35mRemoved Configuration for Nvidia Dynamic Power Management\x1b[0m");
+    }
+    if let Result::Ok(_remove_nvidia_pm_udev )= remove_file("/etc/udev/rules.d/80-nvidia-pm.rules"){
+        println!("\x1b[1;35mRemoved Nvidia PM Udev Rules\x1b[0m");
+    }
+    if let Result::Ok(_remove_nvidia_xorg )= remove_file("/etc/X11/xorg.conf.d/10-gpu.conf"){
+        println!("\x1b[1;35mRemoved Nvidia-Only Xorg Configuration\x1b[0m");
+    }
+    if let Result::Ok(_remove_xrandr_xinitrc )= remove_file("./configs/nvidia/xinitrc.conf"){
+        println!("\x1b[1;35mRemoved Xrandr Xinitrc Configuration\x1b[0m");
+    }
+    
     let blacklist_nvidia = copy("./configs/intel/blacklist-nvidia.conf", "/etc/modprobe.d/blacklist-nvidia.conf") ;
     match blacklist_nvidia {
         Result::Ok(_x) => {
@@ -31,11 +44,17 @@ pub fn switch_hybrid() {
     
     let mut switch = true;
     
-    if let Result::Ok(_remove_intel_config) = remove_file("/etc/modprobe.d/blacklist-nvidia.conf"){
+    if let Result::Ok(_remove_nvidia_blacklist) = remove_file("/etc/modprobe.d/blacklist-nvidia.conf"){
         println!("\x1b[1;35mRemoved Nvidia modules blacklisting\x1b[0m");
     }
     if let Result::Ok(_remove_nvidia_udev )= remove_file("/etc/udev/rules.d/00-remove-nvidia.rules"){
         println!("\x1b[1;35mRemoved Nvidia Shutdown Udev Rules\x1b[0m");
+    }
+        if let Result::Ok(_remove_nvidia_xorg )= remove_file("/etc/X11/xorg.conf.d/10-gpu.conf"){
+        println!("\x1b[1;35mRemoved Nvidia-Only Xorg Configuration\x1b[0m");
+    }
+    if let Result::Ok(_remove_xrandr_xinitrc )= remove_file("./configs/nvidia/xinitrc.conf"){
+        println!("\x1b[1;35mRemoved Xrandr Xinitrc Configuration\x1b[0m");
     }
     
     let nvidia_pm_mod = copy("./configs/hybrid/nvidia-pm.conf", "/etc/modprobe.d/nvidia-pm.conf") ;
@@ -65,17 +84,17 @@ pub fn switch_nvidia (){
     
     let mut switch = true;
     
-    if let Result::Ok(_remove_intel_config) = remove_file("/etc/modprobe.d/blacklist-nvidia.conf"){
+    if let Result::Ok(_remove_nvidia_blacklist) = remove_file("/etc/modprobe.d/blacklist-nvidia.conf"){
         println!("\x1b[1;35mRemoved Nvidia modules blacklisting\x1b[0m");
     }
     if let Result::Ok(_remove_nvidia_udev )= remove_file("/etc/udev/rules.d/00-remove-nvidia.rules"){
         println!("\x1b[1;35mRemoved Nvidia Shutdown Udev Rules\x1b[0m");
     }
-    if let Result::Ok(_remove_nvidia_udev )= remove_file("/etc/modprobe.d/nvidia-pm.conf"){
-        println!("\x1b[1;35mRemoved Nvidia Dynamic Power Management\x1b[0m");
+    if let Result::Ok(_remove_nvidia_pm) = remove_file("/etc/modprobe.d/nvidia-pm.conf"){
+        println!("\x1b[1;35mRemoved Configuration for Nvidia Dynamic Power Management\x1b[0m");
     }
-    if let Result::Ok(_remove_nvidia_udev )= remove_file("//etc/udev/rules.d/80-nvidia-pm.rules"){
-        println!("\x1b[1;35mRemoved Nvidia PM Configuration\x1b[0m");
+    if let Result::Ok(_remove_nvidia_pm_udev )= remove_file("/etc/udev/rules.d/80-nvidia-pm.rules"){
+        println!("\x1b[1;35mRemoved Nvidia PM Udev Rules\x1b[0m");
     }
     
     let nvidia_xorg = copy("./configs/nvidia/10-gpu.conf", "/etc/X11/xorg.conf.d/10-gpu.conf") ;
