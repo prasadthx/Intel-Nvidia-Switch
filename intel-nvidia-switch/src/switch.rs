@@ -11,7 +11,7 @@ use crate::run_on_nvidia::run_on_nvidia;
 pub fn switch_to_intel(){
     let gpu_status = env::var("GPU_STATUS");
     if gpu_status.unwrap() == "intel" {
-        println!("\x1b[96m{}\x1b[0m", "GPU already set to Intel");
+        println!("\x1b[93mGPU already set to \x1b[94mIntel Mode\x1b[0m");
         return;
     }
     
@@ -21,7 +21,7 @@ pub fn switch_to_intel(){
 pub fn switch_to_hybrid(){
     let gpu_status = env::var("GPU_STATUS");
     if gpu_status.unwrap() == "hybrid" {
-        println!("\x1b[96m{}\x1b[0m", "GPU already set to Hybrid");
+        println!("\x1b[93mGPU already set to \x1b[96mHybrid\x1b[0m");
         return;
     }
     
@@ -31,7 +31,7 @@ pub fn switch_to_hybrid(){
 pub fn switch_to_nvidia(){
     let gpu_status = env::var("GPU_STATUS");
     if gpu_status.unwrap() == "nvidia" {
-        println!("\x1b[96m{}\x1b[0m", "GPU already set to Nvidia");
+        println!("\x1b[96mGPU already set to \x1b[92mNvidia\x1b[0m");
         return;
     }
     
@@ -41,9 +41,9 @@ pub fn switch_to_nvidia(){
 pub fn offload_to_nvidia(program: String) {
     let gpu_status = env::var("GPU_STATUS");
     if gpu_status.unwrap() == "intel" {
-        println!("\x1b[96m{}\x1b[0m", "GPU set to Intel. Change to Nvidia Mode / Hybrid Mode");
+        println!("\x1b[31mGPU set to \x1b[34mIntel Mode\x1b[31m. Change to \x1b[32mNvidia Mode \x1b[31m/ \x1b[36mHybrid Mode\x1b[0m");
         return;
     }
-    println!("Running on Nvidia.....");
+    println!("\x1b[31mRunning on \x1b[32mNvidia\x1b[31m.....\x1b[0m");
     run_on_nvidia(program);
 }

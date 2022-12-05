@@ -1,7 +1,8 @@
 use std::fs::{copy, remove_file, write};
+use std::env;
 
 pub fn switch_intel() {
-    println!("Switching to Intel");
+    println!("\x1b[1;33mSwitching to \x1b[94mIntel\x1b[1;33m...\x1b[0m");
     
     let mut switch = true;
     
@@ -21,20 +22,28 @@ pub fn switch_intel() {
     let blacklist_nvidia = copy("./configs/intel/blacklist-nvidia.conf", "/etc/modprobe.d/blacklist-nvidia.conf") ;
     match blacklist_nvidia {
         Result::Ok(_x) => {
-            println!("Successfully added Configuration for Blacklisting Nvidia Drivers");
+            println!("\x1b[1;35mSuccessfully added Configuration for Blacklisting Nvidia Drivers.\x1b[0m");
         },
-        Result::Err(x) => {println!("Error in setting configuration: {}", x); switch = false;}
+        Result::Err(x) => {println!("\x1b[1;31mError in setting configuration: {}\x1b[0m", x); switch = false;}
     }
     
     let shutdown_nvidia = copy("./configs/intel/00-remove-nvidia.rules", "/etc/udev/rules.d/00-remove-nvidia.rules") ;
     match shutdown_nvidia {
         Result::Ok(_x) => {
-            println!("Successfully added Configuration for Shutting Down Nvidia Devices");
+            println!("\x1b[1;35mSuccessfully added Configuration for Shutting Down Nvidia Devices\x1b[0m");
         }
-        Result::Err(x) => {println!("Error in setting configuration: {}", x); switch = false;}
+        Result::Err(x) => {println!("\x1b[1;31mError in setting configuration: {}\x1b[0m", x); switch = false;}
     }
     
     if switch {
-        println!("\x1b[1;34mSuccessfully switched to Intel Mode! Reboot the system.");
+        env::set_var("GPU_STATUS", "intel");
+        let gpu_status = "GPU_STATUS=intel
+                                export GPU_STATUS";
+        let set_gpu_status = write("~/scripts/gpu_status.sh", gpu_status);
+        if let Result::Err(x) = set_gpu_status{println!("\x1b[1;31mError in setting environment variable: {}\x1b[0m", x); switch = false;}
+        
+        if switch {
+             println!("\x1b[1;33mSuccessfully Switched to \x1b[94mIntel Mode\x1b[1;33m! Reboot the system.\x1b[0m");
+        }
     }
 }

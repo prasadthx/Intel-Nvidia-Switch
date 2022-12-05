@@ -1,7 +1,8 @@
 use std::fs::{copy, remove_file, write};
+use std::env;
 
 pub fn switch_hybrid() {
-    println!("\x1b[1;35mSwitching to Hybrid...\x1b[0m");
+    println!("\x1b[1;33mSwitching to \x1b[96mHybrid\x1b[1;33m...\x1b[0m");
     
     let mut switch = true;
     
@@ -35,7 +36,15 @@ pub fn switch_hybrid() {
     }
     
     if switch {
-        println!("\x1b[1;34mSuccessfully Switched to Hybrid Mode! Reboot the system.\x1b[0m");
-        println!("\x1b[1;34mRun Any Program On Nvidia GPU using --run flag.\x1b[0m");
+        env::set_var("GPU_STATUS", "hybrid");
+        let gpu_status = "GPU_STATUS=hybrid
+                                export GPU_STATUS";
+        let set_gpu_status = write("~/scripts/gpu_status.sh", gpu_status);
+        if let Result::Err(x) = set_gpu_status{println!("\x1b[1;31mError in setting environment variable: {}\x1b[0m", x); switch = false;}
+        
+        if switch {
+             println!("\x1b[1;33mSuccessfully Switched to \x1b[96mHybrid Mode\x1b[1;33m! Reboot the system.\x1b[0m");
+             println!("\x1b[1;33mRun Any Program On \x1b[92mNvidia\x1b[1;33m GPU using --run flag.\x1b[0m");
+        }
     }
 }
