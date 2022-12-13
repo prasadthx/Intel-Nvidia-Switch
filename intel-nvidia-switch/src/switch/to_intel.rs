@@ -38,8 +38,8 @@ pub fn switch_intel() {
     if switch {
         env::set_var("GPU_STATUS", "intel");
         let gpu_status = "GPU_STATUS=intel
-                                export GPU_STATUS";
-        let set_gpu_status = write("~/scripts/gpu_status.sh", gpu_status);
+        export GPU_STATUS";
+        let set_gpu_status = write("/home/prasad/scripts/gpu_status.sh", gpu_status);
         if let Result::Err(x) = set_gpu_status{println!("\x1b[1;31mError in setting environment variable: {}\x1b[0m", x); switch = false;}
         
         if switch {

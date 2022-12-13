@@ -1,2 +1,2 @@
-GPU_STATUS=hybrid
-export GPU_STATUS
+GPU_STATUS=intel
+        export GPU_STATUS
