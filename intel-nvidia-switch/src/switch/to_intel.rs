@@ -15,11 +15,11 @@ pub fn switch_intel() {
     if let Result::Ok(_remove_nvidia_xorg )= remove_file("/etc/X11/xorg.conf.d/10-gpu.conf"){
         println!("\x1b[1;35mRemoved Nvidia-Only Xorg Configuration\x1b[0m");
     }
-    if let Result::Ok(_remove_xrandr_xinitrc )= remove_file("./configs/nvidia/xinitrc.conf"){
+    if let Result::Ok(_remove_xrandr_xinitrc )= remove_file("/etc/X11/xinit/xinitrc.d/10-gpu-xrandr.sh"){
         println!("\x1b[1;35mRemoved Xrandr Xinitrc Configuration\x1b[0m");
     }
     
-    let blacklist_nvidia = copy("./configs/intel/blacklist-nvidia.conf", "/etc/modprobe.d/blacklist-nvidia.conf") ;
+    let blacklist_nvidia = copy("/etc/intel-nvidia-switch/configs/intel/blacklist-nvidia.conf", "/etc/modprobe.d/blacklist-nvidia.conf") ;
     match blacklist_nvidia {
         Result::Ok(_x) => {
             println!("\x1b[1;35mSuccessfully added Configuration for Blacklisting Nvidia Drivers.\x1b[0m");
@@ -27,7 +27,7 @@ pub fn switch_intel() {
         Result::Err(x) => {println!("\x1b[1;31mError in setting configuration: {}\x1b[0m", x); switch = false;}
     }
     
-    let shutdown_nvidia = copy("./configs/intel/00-remove-nvidia.rules", "/etc/udev/rules.d/00-remove-nvidia.rules") ;
+    let shutdown_nvidia = copy("/etc/intel-nvidia-switch/configs/intel/00-remove-nvidia.rules", "/etc/udev/rules.d/00-remove-nvidia.rules") ;
     match shutdown_nvidia {
         Result::Ok(_x) => {
             println!("\x1b[1;35mSuccessfully added Configuration for Shutting Down Nvidia Devices\x1b[0m");

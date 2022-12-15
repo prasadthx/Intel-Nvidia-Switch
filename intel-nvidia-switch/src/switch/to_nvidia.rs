@@ -19,7 +19,7 @@ pub fn switch_nvidia (){
         println!("\x1b[1;35mRemoved Nvidia PM Udev Rules\x1b[0m");
     }
     
-    let nvidia_xorg = copy("./configs/nvidia/10-gpu.conf", "/etc/X11/xorg.conf.d/10-gpu.conf") ;
+    let nvidia_xorg = copy("/etc/intel-nvidia-switch/configs/nvidia/10-gpu.conf", "/etc/X11/xorg.conf.d/10-gpu.conf") ;
     match nvidia_xorg {
         Result::Ok(_x) => {
             println!("\x1b[1;35mSuccessfully added Configuration for Xorg Nvidia\x1b[0m");
@@ -27,11 +27,7 @@ pub fn switch_nvidia (){
         Result::Err(x) => {println!("\x1b[1;31mError in setting configuration: {}\x1b[0m", x); switch = false;}
     }
     
-    let xinitrc_config = "xrandr --setprovideroutputsource modesetting NVIDIA-0
-                                xrandr --auto
-                                xrandr --dpi 96";
-    
-    let xrandr_switch = write("./configs/nvidia/xinitrc.conf", xinitrc_config) ;
+    let xrandr_switch = copy("/etc/intel-nvidia-switch/configs/nvidia/10-gpu-xrandr.sh", "/etc/X11/xinit/xinitrc.d/10-gpu-xrandr.sh") ;
     match xrandr_switch {
         Result::Ok(_x) => {
             println!("\x1b[1;35mSuccessfully added Configuration for Xinitrc\x1b[0m");
