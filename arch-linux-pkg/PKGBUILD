@@ -10,7 +10,7 @@ depends=('nvidia-utils')
 makedepends=('git')
 optdepends=('nvidia-prime')
 install="intel-nvidia-switch.install"
-source=("$pkgname-$pkgver.tar.gz")
+source=("$url/releases/download/v$pkgver/intel-nvidia-switch-v0.1.0.tar.gz")
 md5sums=('SKIP')
 validpgpkeys=('SKIP')
 
