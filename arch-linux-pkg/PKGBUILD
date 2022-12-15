@@ -1,0 +1,22 @@
+# Maintainer: Prasad Zore <prasad.zore@outlook.com>
+pkgname=intel-nvidia-switch-bin
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="A small utility to switch GPU on Intel-Nvidia Hybrid Graphics Systems"
+arch=('x86_64')
+url="https://github.com/prasadthx/Intel-Nvidia-Switch"
+license=('MIT')
+depends=('nvidia-utils')
+makedepends=('git')
+optdepends=('nvidia-prime')
+install=
+source=("$pkgname-$pkgver.tar.gz")
+md5sums=('SKIP')
+validpgpkeys=('SKIP')
+
+package() {
+	cd "$pkgname-$pkgver"
+	
+	install -Dm755 intel-nvidia-switch "${pkgdir}/usr/bin/intel-nvidia-switch"
+	install -Dm644 configs "${etc}/etc/intel-nvidia-switch"
+}
