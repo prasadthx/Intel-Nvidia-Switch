@@ -41,9 +41,8 @@ pub fn switch_nvidia (){
     
     if switch {
         env::set_var("GPU_STATUS", "nvidia");
-        let gpu_status = "GPU_STATUS=nvidia
-        export GPU_STATUS";
-        let set_gpu_status = write("/home/prasad/scripts/gpu_status.sh", gpu_status);
+        let gpu_status = "export GPU_STATUS=nvidia";
+        let set_gpu_status = write("/etc/profile.d/gpu_status.sh", gpu_status);
         if let Result::Err(x) = set_gpu_status{println!("\x1b[1;31mError in setting environment variable: {}\x1b[0m", x); switch = false;}
         
         if switch {
