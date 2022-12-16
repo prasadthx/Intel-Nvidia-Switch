@@ -9,6 +9,8 @@ A small utility to switch graphics on Intel-Nvidia Hybrid graphics devices on Li
 
 ## Installation
 
+Install The Proprietary NVIDIA drivers according to the linux kernel installed(nvidia/nvidia-lts). 
+
 ### For Arch Linux Users:-
 1. Use AUR Helpers. eg:-
   ````shell
@@ -22,7 +24,7 @@ A small utility to switch graphics on Intel-Nvidia Hybrid graphics devices on Li
 ### For other Distros:-
 Get the release or download the source code and run:-
   ````shell
-  sudo install.sh
+  sudo ./install.sh
   ````
 
 ## Usage:-
@@ -75,12 +77,5 @@ sudo intel-nvidia-switch --switch nvidia
 
 1. https://wiki.archlinux.org/title/Hybrid_graphics#Fully_power_down_discrete_GPU
 2. https://wiki.archlinux.org/title/PRIME#PRIME_render_offload
-3. https://wiki.archlinux.org/title/PRIME#Discrete_card_as_primary_GPU
+3. https://wiki.archlinux.org/title/NVIDIA_Optimus#Use_NVIDIA_graphics_only
 
-Note: You need to update the GPUs Bus ID in the /etc/intel-nvidia-switch/configs/nvidia/10-gpu.conf 
-You can use the lspci command to find the Bus ID
-The Default Bus IDs used are:
-1. Intel: PCI:0:2:0
-2. Nvidia: PCI:1:0:0
-
-You may have to change it if they don't match yours.
