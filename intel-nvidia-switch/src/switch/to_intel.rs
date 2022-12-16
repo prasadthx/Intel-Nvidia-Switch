@@ -12,7 +12,7 @@ pub fn switch_intel() {
     if let Result::Ok(_remove_nvidia_pm_udev )= remove_file("/etc/udev/rules.d/80-nvidia-pm.rules"){
         println!("\x1b[1;35mRemoved Nvidia PM Udev Rules\x1b[0m");
     }
-    if let Result::Ok(_remove_nvidia_xorg )= remove_file("/etc/X11/xorg.conf.d/10-gpu.conf"){
+    if let Result::Ok(_remove_nvidia_xorg )= remove_file("/etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf"){
         println!("\x1b[1;35mRemoved Nvidia-Only Xorg Configuration\x1b[0m");
     }
     if let Result::Ok(_remove_xrandr_xinitrc )= remove_file("/etc/X11/xinit/xinitrc.d/10-gpu-xrandr.sh"){

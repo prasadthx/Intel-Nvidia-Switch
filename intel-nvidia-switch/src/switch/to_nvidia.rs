@@ -19,7 +19,7 @@ pub fn switch_nvidia (){
         println!("\x1b[1;35mRemoved Nvidia PM Udev Rules\x1b[0m");
     }
     
-    let nvidia_xorg = copy("/etc/intel-nvidia-switch/configs/nvidia/10-gpu.conf", "/etc/X11/xorg.conf.d/10-gpu.conf") ;
+    let nvidia_xorg = copy("/etc/intel-nvidia-switch/configs/nvidia/10-nvidia-drm-outputclass.conf", "/etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf") ;
     match nvidia_xorg {
         Result::Ok(_x) => {
             println!("\x1b[1;35mSuccessfully added Configuration for Xorg Nvidia\x1b[0m");
