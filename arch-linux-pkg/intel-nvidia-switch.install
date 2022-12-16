@@ -4,7 +4,7 @@ post_install() {
 	
 	cp /etc/intel-nvidia-switch/configs/hybrid/80-nvidia-pm.rules /etc/udev/rules.d/80-nvidia-pm.rules
 	
-	export GPU_STATUS=hybrid > /etc/profile.d/gpu_status.sh
+	sh -c 'echo export GPU_STATUS=hybrid > /etc/profile.d/gpu_status.sh'
 
 	echo -e "\e[1;33mSetting Default Setting to \e[96mHybrid Mode\e[1;33m! Reboot the system.\x1b[0m"
 
